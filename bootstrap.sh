@@ -1,3 +1,4 @@
+## =================================
 # The output of all these installation steps is noisy. With this utility
 # the progress report is nice and concise.
 function install {
@@ -53,7 +54,31 @@ install 'ExecJS runtime' nodejs
 
 install 'Nginx' nginx
 
+## =================================
 ## Needed for docs generation.
 update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
+## =================================
+## Memory Swap Allocation
+# size of swapfile
+swapsize=4G
+# does the swap file already exist?
+grep -q "swapfile" /etc/fstab
+# if not then create it
+if [ $? -ne 0 ]; then
+    echo 'swapfile not found. Adding swapfile.'
+    fallocate -l ${swapsize} /swapfile
+    chmod 600 /swapfile
+    mkswap /swapfile
+    swapon /swapfile
+    echo '/swapfile none swap defaults 0 0' >> /etc/fstab
+else
+    echo 'swapfile found. No changes made.'
+fi
+# output results to terminal
+df -h
+cat /proc/swaps
+cat /proc/meminfo | grep Swap
+
+## =================================
 echo 'all set, rock on!'

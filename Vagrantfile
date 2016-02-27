@@ -11,4 +11,8 @@ Vagrant.configure('2') do |config|
   config.vm.synced_folder '../tachibana-system', '/var/www', nfs: { mount_options: ["dmode=777,fmode=777"] }
 
   config.vm.provision :shell, path: 'bootstrap.sh', keep_color: true
+
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", 1024]
+  end
 end
