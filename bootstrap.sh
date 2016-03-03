@@ -54,9 +54,14 @@ install 'ExecJS runtime' nodejs
 
 install 'Nginx' nginx
 
+install 'NTP' ntp               # For setting timezone
 ## =================================
 ## Needed for docs generation.
 update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+## =================================
+## Time setting
+sudo service ntp start
 
 ## =================================
 ## Memory Swap Allocation
