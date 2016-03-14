@@ -52,9 +52,13 @@ SQL
 install 'Nokogiri dependencies' libxml2 libxml2-dev libxslt1-dev
 install 'ExecJS runtime' nodejs
 
-install 'Nginx' nginx
+install 'Nginx' nginx           # The Web Server
 
 install 'NTP' ntp               # For setting timezone
+
+install 'RMagick dependencies' pkg-config ImageMagick libmagickwand-dev # For installing Rmagick
+
+install 'LDAP server' slapd ldap-utils libldap2-dev libsasl2-dev # For ruby-ldap
 ## =================================
 ## Needed for docs generation.
 update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
